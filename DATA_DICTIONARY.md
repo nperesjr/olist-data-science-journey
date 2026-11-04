@@ -5,6 +5,8 @@ Período: 2016 a 2018. Licença: CC BY-NC-SA 4.0.
 
 ## Visão geral
 
+> Nos notebooks, os nomes das tabelas foram encurtados: o prefixo `olist_` e o sufixo `_dataset` foram removidos, e `product_category_name_translation` virou `category_translation`.
+
 | Tabela | Linhas | O que cada linha representa | Chave |
 |---|---|---|---|
 | orders | 99.441 | Um pedido | `order_id` |
