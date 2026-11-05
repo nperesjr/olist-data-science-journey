@@ -10,13 +10,13 @@ Período: 2016 a 2018. Licença: CC BY-NC-SA 4.0.
 | Tabela               | Linhas  | O que cada linha representa | Chave         |
 | -------------------- | ------- | --------------------------- | ------------- |
 | customers            | 99441   | Um cliente                  | `customer_id` |
-| geolocation          | 1000163 | Um zip code prefix          | `geolocation_zip_code_prefix`|
-| order_items          | 112650  | Um item do pedido           | `order_id`               |
-| order_payments       | 103886  | Um pagamento do pedido      | `order_id`               |
-| order_reviews        | 99224   | Uma avaliação do pedido     | `order_id`               |
+| geolocation          | 1000163 | Um ponto de localização (vários por prefixo de CEP) | Sem chave única |
+| order_items          | 112650  | Um item do pedido           | `order_id` + `order_item_id` |
+| order_payments       | 103886  | Um pagamento do pedido      | `order_id` + `payment_sequential` |
+| order_reviews        | 99224   | Uma avaliação do pedido     | `review_id` + `order_id` |
 | orders               | 99441   | Um pedido                   | `order_id`    |
 | products             | 32951   | Um produto                  | `product_id`  |
-| sellers              | 3095    | Um vendedor                 | `sellers_id`  |
+| sellers              | 3095    | Um vendedor                 | `seller_id`  |
 | category_translation | 71      | Uma categoria de produto                            | `product_category_name`              |
 
 
