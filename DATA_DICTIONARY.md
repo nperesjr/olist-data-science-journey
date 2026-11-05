@@ -22,8 +22,6 @@ Período: 2016 a 2018. Licença: CC BY-NC-SA 4.0.
 
 ## Como as tabelas se ligam
 
-## Como as tabelas se ligam
-
 A tabela `orders` é o centro: quase tudo se liga a ela pelo `order_id`.
 
 - `orders` → `customers` pelo `customer_id`
