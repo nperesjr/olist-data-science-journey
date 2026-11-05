@@ -7,17 +7,34 @@ Período: 2016 a 2018. Licença: CC BY-NC-SA 4.0.
 
 > Nos notebooks, os nomes das tabelas foram encurtados: o prefixo `olist_` e o sufixo `_dataset` foram removidos, e `product_category_name_translation` virou `category_translation`.
 
-| Tabela | Linhas | O que cada linha representa | Chave |
-|---|---|---|---|
-| orders | 99.441 | Um pedido | `order_id` |
-| customers | | | |
-| order_items | | | |
-| ... | | | |
+| Tabela               | Linhas  | O que cada linha representa | Chave         |
+| -------------------- | ------- | --------------------------- | ------------- |
+| customers            | 99441   | Um cliente                  | `customer_id` |
+| geolocation          | 1000163 | Um zip code prefix          | `geolocation_zip_code_prefix`|
+| order_items          | 112650  | Um item do pedido           | `order_id`               |
+| order_payments       | 103886  | Um pagamento do pedido      | `order_id`               |
+| order_reviews        | 99224   | Uma avaliação do pedido     | `order_id`               |
+| orders               | 99441   | Um pedido                   | `order_id`    |
+| products             | 32951   | Um produto                  | `product_id`  |
+| sellers              | 3095    | Um vendedor                 | `sellers_id`  |
+| category_translation | 71      | Uma categoria de produto                            | `product_category_name`              |
+
 
 ## Como as tabelas se ligam
 
-- `orders` → `customers` pela coluna `customer_id`
-- (continue: quem liga com quem, e por qual coluna)
+## Como as tabelas se ligam
+
+A tabela `orders` é o centro: quase tudo se liga a ela pelo `order_id`.
+
+- `orders` → `customers` pelo `customer_id`
+- `order_items` → `orders` pelo `order_id`
+- `order_payments` → `orders` pelo `order_id`
+- `order_reviews` → `orders` pelo `order_id`
+- `order_items` → `products` pelo `product_id`
+- `order_items` → `sellers` pelo `seller_id`
+- `products` → `category_translation` pelo `product_category_name`
+- `customers` → `geolocation` pelo prefixo do CEP (`customer_zip_code_prefix` = `geolocation_zip_code_prefix`)
+- `sellers` → `geolocation` pelo prefixo do CEP (`seller_zip_code_prefix` = `geolocation_zip_code_prefix`)
 
 ## Tabelas
 
@@ -29,13 +46,12 @@ Um pedido feito no marketplace. É a tabela central: quase todas as outras se li
 |---|---|---|---|
 | `order_id` | texto | Identificador do pedido | Chave. Único por linha. |
 | `customer_id` | texto | Código do cliente gerado para cada pedido | Chave. Um por pedido; liga com `orders`. NÃO identifica a pessoa. |
-| `customer_unique_id` | texto | Identificador da pessoa | Repete quando a mesma pessoa compra mais de uma vez. Use este para contar clientes. |
 | `order_status` | texto | Situação do pedido | Valores: delivered, shipped, canceled... |
 | `order_purchase_timestamp` | data | Momento da compra | Lido como texto; converter para data. |
+| `order_approved_at` | data | Pedido Aprovado | STR; separar entre data e hora. |
+| `order_delivered_carrier_date` | data | Entrega a transportadora | STR; separar entre data e hora. |
 | `order_delivered_customer_date` | data | Entrega ao cliente | Vazio em pedidos não entregues. |
 | `order_estimated_delivery_date` | data | Prazo prometido | Base do cálculo de atraso. |
-
-(Faltam 2 colunas de data aqui. Complete.)
 
 ## Problemas encontrados
 
